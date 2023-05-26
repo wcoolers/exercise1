@@ -7,6 +7,7 @@ package exercise1;
  *
  * @author dancye
  * @author Paul Bonenfant Jan 25, 2022 
+ * @author Adegoke Akanbi May 26, 2023
  */
 public class CardTrick {
     
@@ -16,19 +17,38 @@ public class CardTrick {
 
         for (int i = 0; i < hand.length; i++) {
             Card card = new Card();
-            //card.setValue(insert call to random number generator here)
-            // 
-            //card.setSuit(Card.SUITS[insert call to random number between 0-3 here])
+            card.setValue(1 + (int)(Math.random()* (13-1) + 1));
+            
+            card.setSuit(Card.SUITS[(int)(Math.random()* 4)]);
+            hand[i]=card;
             // Hint: You can use Random -> random.nextInt(n) to get a random number between 0 and n-1 (inclusive)
             //       Don't worry about duplicates at this point
         }
+        for (Card a: hand){
+            System.out.println(a.getValue() + " " + a.getSuit());
+        }
 
         // insert code to ask the user for Card value and suit, create their card
-        // and search the hand here. 
+        // and search the hand here.
+        java.util.Scanner input = new java.util.Scanner(System.in);
+        System.out.print("enter card and suit values. Card: 1-13 , suits 0-3 seperated by space_");
+        int userCardValue = input.nextInt();
+        int userSuitValue = input.nextInt();
+        Card userCard = new Card();
+        userCard.setValue(userCardValue);
+        userCard.setSuit(Card.SUITS[userSuitValue]);
+        for (int i =0; i < hand.length; i++){
+            if (hand[i].getValue() == userCard.getValue() && hand[i].getSuit() == userCard.getSuit()){
+                printInfo();
+                break;
+            };
+        }
         // Hint: You can ask for values 1 to 10, and then
         //       11 for jack, 12 for queen, etc. (remember arrays are 0-based though)
         //       1 for Hearts, 2 for Diamonds, etc. (remember arrays are 0-based though)
         // 
+        
+        
         // Then loop through the cards in the array to see if there's a match.
         
         // If the guess is successful, invoke the printInfo() method below.
